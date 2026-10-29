@@ -9,7 +9,6 @@ from langchain_core.prompts import ChatPromptTemplate
 
 
 def build_vectorstore(pdf_bytes, embedding_model):
-    """Extract PDF text, split it, and create an in-memory Chroma vector store."""
     temp_path = None
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:

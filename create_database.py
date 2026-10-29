@@ -1,4 +1,3 @@
-"""Optional script for building a persistent database from a fixed PDF."""
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter

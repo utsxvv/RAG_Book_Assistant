@@ -28,19 +28,16 @@ def get_llm():
     )
 
 
-# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 
-# Header
 st.title("📚 BookChat")
 st.caption("Upload a PDF book and ask questions about its content.")
 
 st.divider()
 
 
-# PDF upload section — main page
 st.subheader("📖 Upload Your Book")
 
 uploaded_file = st.file_uploader(
@@ -67,7 +64,6 @@ with col2:
     )
 
 
-# Clear current book and conversation
 if clear_clicked:
     for key in (
         "vectorstore",
@@ -81,7 +77,6 @@ if clear_clicked:
     st.rerun()
 
 
-# Process uploaded PDF
 if process_clicked and uploaded_file is not None:
     try:
         with st.spinner("Reading and indexing your book... Please wait."):
@@ -102,7 +97,6 @@ if process_clicked and uploaded_file is not None:
         st.error(f"Could not process this PDF: {exc}")
 
 
-# Display current book information
 if st.session_state.get("vectorstore") is not None:
     st.divider()
     st.subheader("✅ Currently Loaded Book")
@@ -117,7 +111,6 @@ if st.session_state.get("vectorstore") is not None:
 
 
 
-# Chat section
 st.divider()
 st.subheader("💬 Chat with Your Book")
 
@@ -128,7 +121,6 @@ if st.session_state.get("vectorstore") is None:
     )
 
 else:
-    # Display previous messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
@@ -141,7 +133,6 @@ else:
                         )
                     )
 
-    # Chat input
     question = st.chat_input(
         f"Ask a question about {st.session_state.book_name}..."
     )
